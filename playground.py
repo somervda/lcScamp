@@ -1,4 +1,5 @@
 from langchain_ollama import ChatOllama
+from langchain.agents import create_agent
 
 
 llm = ChatOllama(
@@ -7,5 +8,15 @@ llm = ChatOllama(
     temperature=0,
 )
 
-response = llm.invoke("what state parks are within 20 miles of me?")
-print(response)
+agent = create_agent(
+    model=llm,
+    system_prompt="You are a helpful assistant."
+)
+
+result = agent.invoke({
+    "messages": [
+        {"role": "user", "content": "What time is it?"}
+    ]
+})
+
+print(result)
