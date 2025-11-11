@@ -30,7 +30,7 @@ async def main():
     )
 
     scamp_response = await agent.ainvoke(
-        {"messages": [{"role": "user", "content": "What are all the State Parks are within 20 miles of me?"}]}
+        {"messages": [{"role": "user", "content": "What are the top 3 State Parks would you recomend me staying at that are within 1 hours drive of Lewisburg, PA. I will need RV camping at the park and prefer larger parks with good walking trails?"}]}
     )
 
     print(scamp_response)
