@@ -7,10 +7,13 @@ See [Langchain](https://reference.langchain.com/python/langchain/langchain/). Th
 
 ## Installation
 
+Requires uv package manager. Follow the following steps to setup uv in the project, create a python virtual environement 
+
 - uv init
 - uv venv
 - source .venv/bin/activate
 
+install langchain packages
 
 - uv add langchain
 - uv add langchain-ollama
