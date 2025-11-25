@@ -1,10 +1,11 @@
 [project]
 name = "lcscamp"
 version = "0.1.0"
-description = "Add your description here"
+description = "A Langchain based agent functionality exposed via web services"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "fastapi>=0.121.3",
     "ipykernel>=7.1.0",
     "langchain>=1.0.3",
     "langchain-mcp-adapters>=0.1.12",

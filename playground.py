@@ -13,30 +13,28 @@ load_dotenv(dotenv_path=".env", override=True)
 async def main():
     start_time = time.time()
 
-    # Set up the model, using the chatOllama class, to be used with this agent
+    # Set up the model, using the chatOllama provider package
     # I've found that the granate4:3b model was the model that works best 
     # based on balancing memory availability on a Jetson Nano (About 7Gb)  and speed.
     # Note: I set the context window size (num_ctx) to be the maximum that reliable runs on the jetson nano
-    # Note: I set the context window size (num_ctx) to be the maximum that reliable runs on the jetson nano
     # and set temprature to 0.1 to ensure model accuracy high, and variablity low. 
 
-    llm = ChatOllama(
-        model="granite4:3b",
-        base_url="http://jetai:11434",
-        num_ctx=20480,
-        max_tokens=20480,
-        temperature=0.1,
-    )
     # llm = ChatOllama(
-    #     model="gpt-oss:20b",
-    #     base_url="http://mac:11434",
-    #     num_ctx=131072,
-    #     max_tokens=64636,
+    #     model="granite4:3b",
+    #     base_url="http://192.168.1.117:11434",
+    #     num_ctx=20480,
+    #     max_tokens=4096,
     #     temperature=0.1,
     # )
+    llm = ChatOllama(
+        model="gpt-oss:20b",
+        base_url="http://mac:11434",
+        num_ctx=131072,
+        max_tokens=36864,
+        temperature=0.1,
+    )
 
     # I use the MultiServerMCPClient object to expose the mcpScamp service to the langchain agent
-
     client = MultiServerMCPClient(  
         {
             "scamp": {
@@ -53,15 +51,12 @@ async def main():
     agent = create_agent(
         model=llm,
         tools=tools,
-        system_prompt="You are a helpful assistant. Use tools, where available to get the most accurite answers."
+        system_prompt="You are a helpful assistant. Use tools, where available to get the most accurite answers. Remove any tool information once it is no longer needed."
     )
 
     scamp_response = await agent.ainvoke(
-        {"messages": [{"role": "user", "content": "What state parks are within 20 miles of Lewisburg, PA"}]}
+        {"messages": [{"role": "user", "content": "What state parks are within 30 miles of the following locations; Lewisburg, PA, Pittsburgh, PA."}]}
     )
-    # scamp_response = await agent.ainvoke(
-    #     {"messages": [{"role": "user", "content": "Compare the RV park ratings within 15 miles of Pittsburgh, PA and Scranton, PA. Which location has the highest average ratings?"}]}
-    # )
 
     # Show results
     print(scamp_response)
