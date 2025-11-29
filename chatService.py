@@ -74,10 +74,3 @@ app.mount("/", StaticFiles(directory="static", html=True), name="static")
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8123)
 
-"""
-Angular client Note:
-Use the following chat prompt to make an angular component to use this service
-Create an angular component that accepts a prompt string and sends it to a web service
- in the format of http://piai:8123/chat?prompt={prompt}, this will return a
-  markdown formated string response that needs to be displayed to the user.
-"""
