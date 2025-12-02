@@ -1,0 +1,23 @@
+[Unit]
+Description=Scamp Langchain Agent
+After=network.target
+
+# copy to /etc/systemd/system
+# systemctl daemon-reload
+# systemctl enable chatService.service
+# systemctl start chatService.service
+# systemctl status -n 50 -l  chatService.service
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/lcScamp
+# Path to the python interpreter in your virtual environment
+ExecStart=/home/pi/lcScamp/.venv/bin/python chatService.py 
+Restart=always
+RestartSec=30
+
+
+[Install]
+WantedBy=multi-user.target

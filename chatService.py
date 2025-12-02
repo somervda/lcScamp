@@ -25,9 +25,8 @@ app.add_middleware(
 # Set up the model, using the chatOllama provider package
 llm = ChatOllama(
     model="granite4:3b",
-    base_url="http://192.168.1.117:11434",
+    base_url="http://jetai:11434",
     num_ctx=20480,
-    max_tokens=4096,
     temperature=0.1,
 )
 
@@ -69,6 +68,7 @@ async def chat(prompt: str):
 # Note: Make sure this line is at the end of the file so fastAPI falls through the other
 # routes before serving up static files 
 app.mount("/", StaticFiles(directory="static", html=True), name="static")
+# ngScamp is at http://piai:8123 
 
 
 if __name__ == "__main__":
