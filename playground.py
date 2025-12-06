@@ -19,20 +19,19 @@ async def main():
     # Note: I set the context window size (num_ctx) to be the maximum that reliable runs on the jetson nano
     # and set temprature to 0.1 to ensure model accuracy high, and variablity low. 
 
-    # llm = ChatOllama(
-    #     model="granite4:3b",
-    #     base_url="http://192.168.1.117:11434",
-    #     num_ctx=20480,
-    #     max_tokens=4096,
-    #     temperature=0.1,
-    # )
     llm = ChatOllama(
-        model="gpt-oss:20b",
-        base_url="http://mac:11434",
-        num_ctx=131072,
-        max_tokens=36864,
+        model="granite4:3b",
+        base_url="http://piai:11434",
+        num_ctx=20480,
         temperature=0.1,
     )
+    # llm = ChatOllama(
+    #     model="gpt-oss:20b",
+    #     base_url="http://mac:11434",
+    #     num_ctx=131072,
+    #     max_tokens=36864,
+    #     temperature=0.1,
+    # )
 
     # I use the MultiServerMCPClient object to expose the mcpScamp service to the langchain agent
     client = MultiServerMCPClient(  
@@ -55,7 +54,7 @@ async def main():
     )
 
     scamp_response = await agent.ainvoke(
-        {"messages": [{"role": "user", "content": "What state parks are within 30 miles of the following locations; Lewisburg, PA, Pittsburgh, PA."}]}
+        {"messages": [{"role": "user", "content": "What state parks are within 20 miles of Lewisburg, PA."}]}
     )
 
     # Show results
