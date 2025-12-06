@@ -21,7 +21,7 @@ async def main():
 
     llm = ChatOllama(
         model="granite4:3b",
-        base_url="http://piai:11434",
+        base_url="http://jetai:11434",
         num_ctx=20480,
         temperature=0.1,
     )

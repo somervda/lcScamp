@@ -25,7 +25,7 @@ app.add_middleware(
 # Set up the model, using the chatOllama provider package
 llm = ChatOllama(
     model="granite4:3b",
-    base_url="http://piai:11434",
+    base_url="http://jetai:11434",
     num_ctx=20480,
     temperature=0.1,
 )
@@ -49,7 +49,7 @@ async def lcchat(prompt:str):
     agent = create_agent(
         model=llm,
         tools=tools,
-        system_prompt="You are a helpful assistant. Use tools, where available to get the most accurite answers. If a wikihow or wikipedia link is available include it in the user response"
+        system_prompt="You are a helpful assistant. Use tools, where available to get the most accurate answers. If a wikihow or wikipedia link is available include it in the user response"
     )
 
     scamp_response = await agent.ainvoke(
