@@ -19,6 +19,8 @@ install langchain packages
 - uv add langchain-ollama
 - uv add langchain-mcp-adapters
 
+- uv add python-dotenv
+
 Install FastAPI to provide Langchain app via web services
 
 - uv add FastAPI
