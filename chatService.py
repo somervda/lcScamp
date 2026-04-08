@@ -60,6 +60,13 @@ async def lcchat(prompt:str,llmService:int):
                 num_ctx=32768,
                 temperature=0.1,
             )        
+        case 4:
+            llm = ChatOllama(
+                model="gemma4:26b",
+                base_url="http://mac:11434",
+                num_ctx=65536,
+                temperature=0.1,
+            )        
     tools =  await client.get_tools()  
 
     # Create a new agent
